@@ -5,11 +5,16 @@ pipeline {
       steps {
         echo 'Hello World'
       }
-    } 
-    stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
+    }
+    stage('Build') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
+      }
+    }
+    stage('test') {
+      steps {
+        echo '222'
+      }
+    }
   }
 }
