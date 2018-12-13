@@ -15,7 +15,14 @@ pipeline {
       steps {
         echo '222'
         sh 'mvn test'
+        
       }
+      post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+     }
+
     }
   }
 }
