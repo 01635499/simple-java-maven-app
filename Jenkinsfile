@@ -9,6 +9,7 @@ pipeline {
     stage('Init') {
       steps {
         echo 'Hello World'
+         sh 'mvn package'
            
       }
     }
