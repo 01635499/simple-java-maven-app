@@ -8,11 +8,7 @@ pipeline {
             sh 'mvn -v'
           }
       }
-      
-    
-      
     }
-      
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
@@ -37,6 +33,15 @@ pipeline {
         
       }
     }
-    
   }
+}
+
+def getDockerImage(imageName) {
+    return { ->
+        def img = docker.image(imageName)
+        /* make sure we have the up-to-date image */
+        img.pull()
+        /* dance around https://issues.jenkins-ci.org/browse/JENKINS-34276 */
+        return docker.image(img.imageName())
+    }()
 }
