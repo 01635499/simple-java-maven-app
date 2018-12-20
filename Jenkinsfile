@@ -1,15 +1,13 @@
 pipeline {
   agent any
   
-  tools {
-    maven 'mvn-3.5.2'
-  }
+  
   
   stages {
     stage('Init') {
       steps {
         echo 'Hello World'
-         sh 'mvn package'
+        
            
       }
     }
