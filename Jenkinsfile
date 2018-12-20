@@ -4,17 +4,15 @@ pipeline {
     stage('Init') {
       steps {
         echo 'Hello World'
+           getDockerImage('maven:3.2').inside {
+            sh 'mvn -v'
+          }
       }
       
     
       
     }
-      stage('Init2') {
-      getDockerImage('maven:3.2').inside {
-            sh 'mvn -v'
-      }
-      }
-    
+      
     stage('Build') {
       steps {
         sh 'mvn -B -DskipTests clean package'
