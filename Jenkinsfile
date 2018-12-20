@@ -1,12 +1,15 @@
 pipeline {
   agent any
+  
+  tools {
+    maven 'mvn-3.5.2'
+  }
+  
   stages {
     stage('Init') {
       steps {
         echo 'Hello World'
-           getDockerImage('maven:3.2').inside {
-            sh 'mvn -v'
-          }
+           
       }
     }
     stage('Build') {
@@ -36,12 +39,4 @@ pipeline {
   }
 }
 
-def getDockerImage(imageName) {
-    return { ->
-        def img = docker.image(imageName)
-        /* make sure we have the up-to-date image */
-        img.pull()
-        /* dance around https://issues.jenkins-ci.org/browse/JENKINS-34276 */
-        return docker.image(img.imageName())
-    }()
-}
+
